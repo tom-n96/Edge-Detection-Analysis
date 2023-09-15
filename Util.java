@@ -21,6 +21,6 @@ public class Util {
 		g.drawImage(input, 0, 0, null);
 		g.dispose();
 		
-        return output;
+		return output;
 	}
 }
