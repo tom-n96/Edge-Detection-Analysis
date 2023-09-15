@@ -11,7 +11,7 @@ public class Main {
         if(args.length < 2) {  
             System.out.println("Please run with arguments: --<algorithm name> <path> or --help for more info.");
         }
-        else if(args[0].equalsIgnoreCase("--help")) {
+        else if(args[0].equalsIgnoreCase("--help") || args[0].equalsIgnoreCase("-h") ) {
             System.out.println("Usage: --<algorithm name> <path>\nAvailable algorithms are:\n\t--prewitt\n\t--sobel\n\t--canny\n\t--roberts");
         }
         else {
@@ -36,19 +36,19 @@ public class Main {
             
             switch(algorithm) {
                 case "prewitt":
-                    System.out.println("Running prewitt operation on images in " + path);
+                    System.out.println("Running prewitt operation on image at " + path);
                     //Prewitt logic here
                     break;
                 case "sobel":
-                    System.out.println("Running sobel operation on images in " + path);
+                    System.out.println("Running sobel operation on image at " + path);
                     //Sobel logic here
                     break;
                 case "canny":
-                    System.out.println("Running canny operation on images in " + path);
+                    System.out.println("Running canny operation on image at " + path);
                     //Canny logic here
                     break;
                 case "roberts":
-                    System.out.println("Running roberts operation on images in " + path);
+                    System.out.println("Running roberts operation on image at " + path);
                     //Roberts logic here
                     break;
                 default:

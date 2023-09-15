@@ -17,9 +17,9 @@ public class Util {
 	//Image manipulation methods
 	public static BufferedImage toGrayscale(BufferedImage input) {
 		BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
-        Graphics2D g = output.createGraphics();
-        g.drawImage(input, 0, 0, null);
-        g.dispose();
+		Graphics2D g = output.createGraphics();
+		g.drawImage(input, 0, 0, null);
+		g.dispose();
 		
         return output;
 	}
