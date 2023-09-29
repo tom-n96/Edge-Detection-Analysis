@@ -8,12 +8,13 @@ import javax.imageio.ImageIO;
 
 public class Main {
     public static void main(String args[]) {
-    	if(args[0].equalsIgnoreCase("--help") || args[0].equalsIgnoreCase("-h")) {
-            System.out.println("Usage: --<algorithm name> <path>\nAvailable algorithms are:\n\t--prewitt\n\t--sobel\n\t--canny\n\t--roberts");
-        }
-    	else if(args.length < 2) {  
+    	if(args.length < 1) {  
             System.out.println("Please run with arguments: --<algorithm name> <path> or --help for more info.");
         }
+    	else if(args[0].equalsIgnoreCase("--help") || args[0].equalsIgnoreCase("-h")) {
+            System.out.println("Usage: --<algorithm name> <path>\nAvailable algorithms are:\n\t--prewitt\n\t--sobel\n\t--canny\n\t--roberts");
+        }
+
         else {
             String algorithm = Util.removeAllChar(args[0],'-');	//Which algorithm to run, provided by arguments
             String path = args[1];	//Which path to load an image from
@@ -39,7 +40,8 @@ public class Main {
                     break;
                 case "sobel": //Handles the case of executing Sobel operation
                     System.out.println("Running sobel operation on image at " + path);
-                    //Sobel logic here
+                    Sobel s = new Sobel();
+                    outputImage = s.sobelOperator(inputImage);
                     break;
                 case "canny": //Handles the case of executing Canny operation
                     System.out.println("Running canny operation on image at " + path);
@@ -48,6 +50,10 @@ public class Main {
                 case "roberts": //Handles the case of executing Roberts operation
                     System.out.println("Running roberts operation on image at " + path);
                     //Roberts logic here
+                    break;
+                case "debug": //Case for running debug commands
+                    System.out.println("Debug at " + path);
+                    outputImage = Util.intToBufferedImage(Util.bufferedImageToInt(Util.toGrayscale(inputImage)));
                     break;
                 default:
                     System.out.println("Invalid argument. Use --help for more info.");
