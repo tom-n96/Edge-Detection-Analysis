@@ -22,14 +22,17 @@ public class Sobel {
 		for(int y = 1; y < A.length-1;y++) {
 			for(int x = 1; x < A[0].length-1; x++) {
 				//Calculate Gx for each iteration, by multiplying input pixels' values with kernel
-				int Gx = kernelX[0][0] * A[y-1][x-1] + kernelX[0][1] * A[y-1][x] + kernelX[0][2] * A[y-1][x+1] +
-					 	 kernelX[1][0] * A[y]  [x-1] + kernelX[1][1] * A[y]  [x] + kernelX[1][2] * A[y]  [x+1] +
-						 kernelX[2][0] * A[y+1][x-1] + kernelX[2][1] * A[y+1][x] + kernelX[2][2] * A[y+1][x+1];
+				int Gx = 0;
+				for(int i = 0; i<=2;i++)
+					for(int j = 0; j <=2;j++)
+						Gx+=kernelX[i][j] * A[y+(i-1)][x+(j-1)];
 				
 				//Calculate Gy for each iteration, by multiplying input pixels' values with kernel
-				int Gy = kernelY[0][0] * A[y-1][x-1] + kernelY[0][1] * A[y-1][x] + kernelY[0][2] * A[y-1][x+1] +
-					 	 kernelY[1][0] * A[y]  [x-1] + kernelY[1][1] * A[y]  [x] + kernelY[1][2] * A[y]  [x+1] +
-						 kernelY[2][0] * A[y+1][x-1] + kernelY[2][1] * A[y+1][x] + kernelY[2][2] * A[y+1][x+1];
+				int Gy = 0;
+				for(int i = 0; i<=2;i++)
+					for(int j = 0; j <=2;j++)
+						Gy+=kernelY[i][j] * A[y+(i-1)][x+(j-1)];
+				
 				
 				//Calculate Magnitude for the pixel
 				int magnitude = (int) Math.sqrt(Math.pow(Gx, 2)+Math.pow(Gy, 2));
@@ -46,3 +49,4 @@ public class Sobel {
 	
 	
 }
+
