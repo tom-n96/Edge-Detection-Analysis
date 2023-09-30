@@ -32,11 +32,12 @@ public class Main {
                 System.out.println("Image could not be loaded from: " + path);
                 e.printStackTrace();
             }
-            
+
             switch(algorithm) {
                 case "prewitt": //Handles the case of executing Prewitt operation
                     System.out.println("Running prewitt operation on image at " + path);
-                    //Prewitt logic here
+                    Prewitt prewitt = new Prewitt();
+                    outputImage = prewitt.prewittOperator(inputImage);
                     break;
                 case "sobel": //Handles the case of executing Sobel operation
                     System.out.println("Running sobel operation on image at " + path);
