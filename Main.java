@@ -17,7 +17,9 @@ public class Main {
 
         else {
             String algorithm = Util.removeAllChar(args[0],'-');	//Which algorithm to run, provided by arguments
-            String path = args[1];	//Which path to load an image from
+            String path = "";
+           // if(!algorithm.equalsIgnoreCase("debug")) //only load path if mode is not debug
+            path = args[1];	//Which path to load an image from
             
             File toLoad = new File(path);
             String directory = toLoad.getParent();
@@ -54,7 +56,8 @@ public class Main {
                     break;
                 case "debug": //Case for running debug commands
                     System.out.println("Debug at " + path);
-                    outputImage = Util.intToBufferedImage(Util.bufferedImageToInt(Util.toGrayscale(inputImage)));
+                    Canny c = new Canny();
+                    outputImage = c.filterGaussian(inputImage, 5, 5f);
                     break;
                 default:
                     System.out.println("Invalid argument. Use --help for more info.");
