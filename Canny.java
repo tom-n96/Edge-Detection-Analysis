@@ -27,7 +27,7 @@ public class Canny {
 		
 		//Step 4: Double threshold 
 		int maxGradient = maxGradient(A);
-		//A = doubleThreshold(A,(int) (maxGradient*lowThreshold), (int) (maxGradient*highThreshold));
+		A = doubleThreshold(A,(int) (maxGradient*lowThreshold), (int) (maxGradient*highThreshold));
 
 		
 		output=A;
@@ -63,7 +63,7 @@ public class Canny {
 				if (output[y][x] < lowThreshold) {
 		            output[y][x] = 0; // Not an edge
 		        } else if (output[y][x] < highThreshold) {
-		            output[y][x] = 50; // Weak edge
+		            output[y][x] = 75; // Weak edge
 		        } else {
 		            output[y][x] = 255; // Strong edge
 		        }
@@ -97,23 +97,24 @@ public class Canny {
 	            
 	            //based on which direction the pixel is in, find the adjacent pixels in the gradient, which will be interpolated
 	            switch (dir) {
-	                case 0:   //if the direction is 0
-	                    ip1 = A[y][x - 1];
-	                    ip2 = A[y][x + 1];
-	                    break;
-	                case 45: //if the direction is 45
-	                    ip1 = (A[y - 1][x + 1] + A[y][x]) / 2;
-	                    ip2 = (A[y + 1][x - 1] + A[y][x]) / 2;
-	                    break;
-	                case 90: //if the direction is 90
-	                    ip1 = A[y - 1][x];
-	                    ip2 = A[y + 1][x];
-	                    break;
-	                case 135: //if the direction is 135
-	                    ip1 = (A[y - 1][x - 1] + A[y][x]) / 2;
-	                    ip2 = (A[y + 1][x + 1] + A[y][x]) / 2;
-	                    break;
-	            }
+	            case 0:   //if the direction is 0
+	                ip1 = A[y][x - 1];
+	                ip2 = A[y][x + 1];
+	                break;
+	            case 45: //if the direction is 45
+	                ip1 = (A[y - 1][x + 1] + A[y + 1][x - 1]) / 2; 
+	                ip2 = (A[y + 1][x + 1] + A[y - 1][x - 1]) / 2;
+	                break;
+	            case 90: //if the direction is 90
+	                ip1 = A[y - 1][x];
+	                ip2 = A[y + 1][x];
+	                break;
+	            case 135: //if the direction is 135
+	                ip1 = (A[y - 1][x - 1] + A[y + 1][x + 1]) / 2;
+	                ip2 = (A[y + 1][x - 1] + A[y - 1][x + 1]) / 2;
+	                break;
+	        }
+
 	            
 	            if (A[y][x] >= ip1 && A[y][x] >= ip2) {
 	                output[y][x] = A[y][x];
