@@ -1,6 +1,8 @@
 
-import java.awt.Graphics2D;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ColorConvertOp;
 import java.awt.image.WritableRaster;
 
 
@@ -15,15 +17,76 @@ public class Util {
 	}
 	
 	
+	public static int [][] float2DtoInt2D(float[][] A){
+		int [][] output = new int[A.length][A[0].length];
+		for(int y = 1; y < A.length-1;y++) {
+			for(int x = 1; x < A[0].length-1; x++) {
+				output[y][x]=(int) A[y][x];
+			}
+		}
+		return output;
+	}
+	
 	//Image manipulation methods
-	public static BufferedImage toGrayscale(BufferedImage input) {   //converts a bufferedimage into its grayscale equivalent
+	
+	public static int [][] normalize(int [][] A){
+		int [][] output = A;
+		float max = 0;
+
+		// Find the Max
+		for (int y = 0; y < A.length; y++) {
+		    for (int x = 0; x < A[0].length; x++) {
+		        if(output[y][x]> max)
+		            max = output[y][x];
+		    }
+		}
+
+		// Normalize to max
+		for (int y = 0; y < A.length; y++) {
+		    for (int x = 0; x < A[0].length; x++) {
+		        output[y][x] = (int) ((output[y][x] / max) * 255);
+		    }
+		}
+		
+		return output;
+	}
+	
+	public static float [][] normalize(float [][] A){
+		float [][] output = A;
+		float max = 0;
+
+		// Find the Max
+		for (int y = 0; y < A.length; y++) {
+		    for (int x = 0; x < A[0].length; x++) {
+		        if(output[y][x]> max)
+		            max = output[y][x];
+		    }
+		}
+
+		// Normalize to max
+		for (int y = 0; y < A.length; y++) {
+		    for (int x = 0; x < A[0].length; x++) {
+		        output[y][x] = (output[y][x] / max) * 255;
+		    }
+		}
+		
+		return output;
+	}
+	
+	public static BufferedImage toGrayscale(BufferedImage source) {
+	    BufferedImageOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
+	    BufferedImage image = op.filter(source, null);
+	    return image;
+	}
+	
+	/*public static BufferedImage toGrayscale(BufferedImage input) {   //converts a bufferedimage into its grayscale equivalent
 		BufferedImage output = new BufferedImage(input.getWidth(), input.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
 		Graphics2D g = output.createGraphics();
 		g.drawImage(input, 0, 0, null);
 		g.dispose();
 		
 		return output;
-	}
+	}*/
 	
 	public static int [][] bufferedImageToInt(BufferedImage input){    //takes GRAYSCALE bufferedimage and converts to a 2d array of ints
 		int [][] output = new int[input.getHeight()][input.getWidth()]; //create space for all pixel values to be stored in int format
@@ -49,4 +112,5 @@ public class Util {
 		
 		return output;
 	}
+	
 }

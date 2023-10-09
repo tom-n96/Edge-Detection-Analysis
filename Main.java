@@ -48,7 +48,8 @@ public class Main {
                     break;
                 case "canny": //Handles the case of executing Canny operation
                     System.out.println("Running canny operation on image at " + path);
-                    //Canny logic here
+                    Canny c = new Canny();
+                    outputImage = c.cannyOperator(inputImage);
                     break;
                 case "roberts": //Handles the case of executing Roberts operation
                     System.out.println("Running roberts operation on image at " + path);
@@ -56,8 +57,8 @@ public class Main {
                     break;
                 case "debug": //Case for running debug commands
                     System.out.println("Debug at " + path);
-                    Canny c = new Canny();
-                    outputImage = c.filterGaussian(inputImage, 5, 5f);
+                    //Canny c = new Canny();
+                    //outputImage = c.filterGaussian(inputImage, 5, 5f);
                     break;
                 default:
                     System.out.println("Invalid argument. Use --help for more info.");

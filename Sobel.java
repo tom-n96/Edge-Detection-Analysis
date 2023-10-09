@@ -15,10 +15,19 @@ public class Sobel {
 			{-1,-2,-1}
 	};
 	
-	public BufferedImage sobelOperator(BufferedImage inputImage) {
+	public BufferedImage sobelOperator(BufferedImage inputImage) { //overload for bufferedimage input and output
 		int [][] A = Util.bufferedImageToInt(Util.toGrayscale(inputImage)); //input image
-		int [][] output = new int[A.length][A[0].length]; //output storage
+		return Util.intToBufferedImage(sobelOperator(A)); //Convert output to bufferedImage and return it
 		
+	}
+	
+	public int [][] sobelOperator(int [][] A) {  			//overload for 2d int array input and output
+		float sobel [][][] = sobelOperatorWithDirection(A);
+		return Util.float2DtoInt2D(sobel[0]); //return output
+	}
+	
+	public float [][][] sobelOperatorWithDirection(int [][] A) { //returns an array element [0] magnitude, element [1] direction
+		float [][][] output = new float[2][A.length][A[0].length]; //output storage
 		for(int y = 1; y < A.length-1;y++) {
 			for(int x = 1; x < A[0].length-1; x++) {
 				//Calculate Gx for each iteration, by multiplying input pixels' values with kernel
@@ -35,17 +44,18 @@ public class Sobel {
 				
 				
 				//Calculate Magnitude for the pixel
-				int magnitude = (int) Math.sqrt(Math.pow(Gx, 2)+Math.pow(Gy, 2));
-				output[y][x]=magnitude; //save magnitude for pixel in the output array
+				float magnitude = (float) Math.sqrt(Math.pow(Gx, 2)+Math.pow(Gy, 2));
+				float direction = (float) Math.toDegrees(Math.atan2(Gy, Gx));
+				if(direction<0)
+					direction+=360;
+
+				output[0][y][x]=magnitude; //save magnitude for pixel in the output array
+				output[1][y][x]=direction; //save direction for pixel in the output array
 			}
 		}
-		
-		return Util.intToBufferedImage(output); //Convert output to bufferedImage and return it
-		
-		
+		output[0]=Util.normalize(output[0]); //Normalize the magnitudes
+		return output; //return output
 	}
-	
-	
 	
 	
 }
