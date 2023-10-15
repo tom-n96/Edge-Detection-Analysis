@@ -5,10 +5,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 public class Main {
     public static void main(String args[]) {
-    	if(args.length < 1) {  
+    	if(args.length < 1) {
             System.out.println("Please run with arguments: --<algorithm name> <path> or --help for more info.");
         }
     	else if(args[0].equalsIgnoreCase("--help") || args[0].equalsIgnoreCase("-h")) {
@@ -53,7 +58,8 @@ public class Main {
                     break;
                 case "roberts": //Handles the case of executing Roberts operation
                     System.out.println("Running roberts operation on image at " + path);
-                    //Roberts logic here
+                    Roberts r = new Roberts();
+                    outputImage = r.robertsOperator(inputImage);
                     break;
                 case "debug": //Case for running debug commands
                     System.out.println("Debug at " + path);

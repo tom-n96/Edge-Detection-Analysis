@@ -112,5 +112,24 @@ public class Util {
 		
 		return output;
 	}
-	
+
+	public static int getMagnitude(int x, int y, int[] dx, int[] dy, int[][] grayScaleArray) {
+		int Gx = 0, Gy = 0;
+
+		// apply the mask to the current pixel and calculate the gradient magnitudes
+		int index = 0;
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 2; j++) {
+				int newX = x + i;
+				int newY = y + j;
+				Gx += grayScaleArray[newX][newY] * dx[index];
+				Gy += grayScaleArray[newX][newY] * dy[index];
+				index++;
+			}
+		}
+
+		// combine the gradient magnitudes with the Euclidean norm
+		return (int) Math.sqrt(Gx * Gx + Gy * Gy);
+	}
+
 }
