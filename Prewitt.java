@@ -19,6 +19,7 @@ public class Prewitt {
     public BufferedImage prewittOperator(BufferedImage inputImage) {
         // convert the input image into two arrays, one for the input and output
         int [][] grayScaleArray = Util.bufferedImageToInt(Util.toGrayscale(inputImage));
+		long start = System.currentTimeMillis();
         int width = grayScaleArray.length; // get the width
         int height = grayScaleArray[0].length; // get the height
         int [][] outputArray = new int[width][height]; // init the output array
@@ -32,7 +33,7 @@ public class Prewitt {
                 outputArray[x][y] = magnitude;
             }
         }
-
+		System.out.println("TIME: "+(System.currentTimeMillis()-start));
         // return an image using the Util with the new pixel values
         return Util.intToBufferedImage(outputArray);
     }

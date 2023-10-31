@@ -25,7 +25,7 @@ public class Main {
             String path = "";
            // if(!algorithm.equalsIgnoreCase("debug")) //only load path if mode is not debug
             path = args[1];	//Which path to load an image from
-            
+            System.out.println("ALGORI "+algorithm+" path: "+path);
             File toLoad = new File(path);
             String directory = toLoad.getParent();
             

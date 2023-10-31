@@ -17,6 +17,7 @@ public class Roberts {
     public BufferedImage robertsOperator(BufferedImage inputImage) {
         // convert the input image into two arrays, one for the input and output
         int[][] grayScaleArray = Util.bufferedImageToInt(Util.toGrayscale(inputImage));
+		long start = System.currentTimeMillis();
         int width = grayScaleArray.length;
         int height = grayScaleArray[0].length;
         int[][] outputArray = new int[width][height];
@@ -32,6 +33,7 @@ public class Roberts {
         }
 
         // return an image using the Util with the new pixel values
+		System.out.println("TIME: "+(System.currentTimeMillis()-start));
         return Util.intToBufferedImage(outputArray);
     }
 

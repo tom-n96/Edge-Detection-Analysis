@@ -28,6 +28,7 @@ public class Sobel {
 	
 	public float [][][] sobelOperatorWithDirection(int [][] A) { //returns an array element [0] magnitude, element [1] direction
 		float [][][] output = new float[2][A.length][A[0].length]; //output storage
+		long start = System.currentTimeMillis();
 		for(int y = 1; y < A.length-1;y++) {
 			for(int x = 1; x < A[0].length-1; x++) {
 				//Calculate Gx for each iteration, by multiplying input pixels' values with kernel
@@ -54,6 +55,7 @@ public class Sobel {
 			}
 		}
 		output[0]=Util.normalize(output[0]); //Normalize the magnitudes
+		System.out.println("TIME: "+(System.currentTimeMillis()-start));
 		return output; //return output
 	}
 	

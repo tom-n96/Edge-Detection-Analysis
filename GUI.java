@@ -81,54 +81,10 @@ public class GUI {
     }
 
     private static void executeAlgorithm(String algorithm, String path) {
-
-        BufferedImage inputImage = null;
-        BufferedImage outputImage = null;
-        File toLoad = new File(path);
-        String directory = toLoad.getParent();
-
-        try {
-            inputImage = ImageIO.read(toLoad);   //Load image from given path
-        } catch (IOException e) {
-            System.out.println("Image could not be loaded from: " + path);
-            e.printStackTrace();
-        }
-
-        switch (algorithm.toLowerCase()) {
-            case "prewitt":
-                Prewitt prewitt = new Prewitt();
-                outputImage = prewitt.prewittOperator(inputImage);
-                break;
-            case "sobel":
-                Sobel s = new Sobel();
-                outputImage = s.sobelOperator(inputImage);
-                break;
-            case "canny":
-                Canny c = new Canny();
-                outputImage = c.cannyOperator(inputImage);
-                break;
-            case "roberts":
-                Roberts r = new Roberts();
-                outputImage = r.robertsOperator(inputImage);
-                break;
-            default:
-                System.out.println("Invalid algorithm. Use --help for more info.");
-        }
-
-        // dateTime for file name
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        LocalDateTime dt = LocalDateTime.now();
-
-        File outputImageFile = new File(directory, algorithm+"-"+formatter.format(dt)+".png"); //Save file with name of algorithm, and a timestamp
-        try {
-            ImageIO.write(outputImage, "png", outputImageFile);
-            System.out.println("Output saved to " + outputImageFile.getPath());
-            loadImage(outputImageFile, newImageLabel);
-        } catch (IOException e) {
-            System.out.println("Error writing output file.");
-            e.printStackTrace();
-        }
-
+    	//Call main method
+    	String [] mainArgs = {"--"+algorithm.toLowerCase(), path};
+    	Main.main(mainArgs);
+       
     }
 
     public static void loadImage(File file, JLabel imageLabel) {

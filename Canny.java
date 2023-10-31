@@ -12,6 +12,7 @@ public class Canny {
 		int [][] A = Util.bufferedImageToInt(Util.toGrayscale(inputImage)); //input image
 		int [][] output = new int[A.length][A[0].length]; //output storage
 		
+		long start = System.currentTimeMillis();
 		//Step 1: Apply Gaussian filter to smooth image
 		GaussianFilter gaus = new GaussianFilter();   		//Create an instance of the Gaussian filter
 		A = gaus.filterGaussian(A, k, standardDeviation);	//Apply the filter to the input image
@@ -31,6 +32,7 @@ public class Canny {
 
 		
 		output=A;
+		System.out.println("TIME: "+(System.currentTimeMillis()-start));
 		return Util.intToBufferedImage(output); //Convert output to bufferedImage and return it
 		
 		
