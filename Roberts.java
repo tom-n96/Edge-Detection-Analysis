@@ -25,7 +25,7 @@ public class Roberts {
         // loop through each pixel
         for (int x = 0; x < width - 1; x++) {
             for (int y = 0; y < height - 1; y++) {
-                int magnitude = Util.getMagnitude(x, y, dx, dy, grayScaleArray);
+                int magnitude = Util.getMagnitude(x, y, dx, dy, grayScaleArray, "Roberts");
 
                 // apply magnitude
                 outputArray[x][y] = magnitude;

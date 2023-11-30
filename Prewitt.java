@@ -27,8 +27,7 @@ public class Prewitt {
         // loop through each pixel
         for (int x = 1; x < width - 1; x++) {
             for (int y = 1; y < height -1; y++) {
-                int magnitude = Util.getMagnitude(x, y, dx, dy, grayScaleArray);
-                
+                int magnitude = Util.getMagnitude(x, y, dx, dy, grayScaleArray, "Prewitt");
                 // apply magnitude
                 outputArray[x][y] = magnitude;
             }
